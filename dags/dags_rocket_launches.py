@@ -16,6 +16,12 @@ dag = DAG(
 
 download_launches = BashOperator(
     task_id="download_launches",
-    bash_command = "curl -o /tmp/launches.json -L
-                   'https://ll.thespacedevs.com/2.0.0/launch/upcoming'", dag=dag,
+    bash_command="curl -o /tmp/launches.json -L 'https://ll.thespacedevs.com/2.0.0/launch/upcoming'",  # noqa: E501
+    dag=dag,
 )
+
+def _get_pictures():
+    #경로가 존재하는지 확인
+    pathlib.Path("/tmp/images").mkdir(parents=True, exist_ok=True)
+
+    
